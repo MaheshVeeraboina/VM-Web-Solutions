@@ -24,6 +24,8 @@ const Solution = () => {
                 <img 
                   src="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?auto=format&fit=crop&q=80&w=600" 
                   alt="Mobile First Design" 
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-cover mt-6 opacity-90"
                 />
                 

@@ -53,7 +53,13 @@ const Testimonials = () => {
               <p className="text-slate-600 text-lg leading-relaxed mb-8 relative z-10">"{r.text}"</p>
               
               <div className="flex items-center gap-4 relative z-10">
-                <img src={r.image} alt={r.name} className="w-12 h-12 rounded-full border-2 border-white shadow-sm" />
+                <img 
+                  src={r.image} 
+                  alt={r.name} 
+                  loading="lazy"
+                  decoding="async"
+                  className="w-12 h-12 rounded-full border-2 border-white shadow-sm" 
+                />
                 <div>
                   <div className="font-bold text-slate-900">{r.name}</div>
                   <div className="text-sm text-slate-500 font-medium">{r.role}</div>

@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
 import { ArrowRight, CheckCircle2, Dumbbell, CalendarRange, Users, Search, Plus, Minus } from 'lucide-react';
 import { motion } from 'motion/react';
+import desktopAvif from '@/assets/images/gym-mockup.png?w=400;800;1200&format=avif&as=srcset';
+import desktopWebp from '@/assets/images/gym-mockup.png?w=400;800;1200&format=webp&as=srcset';
+import desktopSrc from '@/assets/images/gym-mockup.png?w=1200&as=src';
+import desktopLqip from '@/assets/images/gym-mockup.png?w=20&format=webp&blur=10&inline';
+import { OptimizedPicture } from '../components/ui/OptimizedPicture';
 
 const GymWebDesign = () => {
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
@@ -65,7 +70,18 @@ const GymWebDesign = () => {
               className="relative hidden lg:block"
             >
               <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl border-4 border-white/50 relative z-10 bg-slate-900">
-                <img src="/gym-mockup.png" alt="Gym Fitness App UI" className="w-full h-full object-cover" />
+                <OptimizedPicture 
+                  avifSrcSet={desktopAvif}
+                  webpSrcSet={desktopWebp}
+                  fallbackSrc={desktopSrc}
+                  lqip={desktopLqip}
+                  alt="Gym Fitness App UI"
+                  className="w-full h-full object-cover"
+                  pictureClassName="w-full h-full"
+                  fetchPriority="high"
+                  loading="eager"
+                  decoding="sync"
+                />
               </div>
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-gradient-to-br from-emerald-500/20 to-teal-500/20 blur-3xl -z-10 rounded-full" />
             </motion.div>
