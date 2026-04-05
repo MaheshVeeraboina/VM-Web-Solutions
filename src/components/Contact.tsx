@@ -120,7 +120,7 @@ const Contact = () => {
                   <label className="block text-sm font-bold text-slate-700 mb-2">Phone Number</label>
                   <div className="relative">
                     <Phone size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" />
-                    <input required name="user_phone" type="tel" placeholder="+91 00000 00000" className={`w-full pl-12 pr-4 py-4 rounded-xl bg-slate-50 border ${phoneError ? 'border-red-500' : 'border-slate-200'} focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 outline-none transition-all`} value={formState.phone} onChange={(e) => setFormState({...formState, phone: e.target.value})} />
+                    <input required name="user_phone" type="tel" maxLength={15} placeholder="+91 00000 00000" className={`w-full pl-12 pr-4 py-4 rounded-xl bg-slate-50 border ${phoneError ? 'border-red-500' : 'border-slate-200'} focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 outline-none transition-all`} value={formState.phone} onChange={(e) => setFormState({...formState, phone: e.target.value.replace(/[^0-9+\s-]/g, '')})} />
                   </div>
                   {phoneError && <p className="text-red-500 text-xs font-bold mt-2">Please enter a valid phone number (at least 10 digits).</p>}
                 </div>
