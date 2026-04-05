@@ -8,6 +8,7 @@ const FloatingWhatsApp = () => {
       href="https://wa.me/918309358319?text=Hi%20VM%20Web%20Solutions,%20I%20want%20to%20get%20more%20customers.%20Can%20we%20schedule%20a%20demo?"
       target="_blank"
       rel="noopener noreferrer"
+      aria-label="Chat with us on WhatsApp"
       initial={{ scale: 0, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}
       whileHover={{ scale: 1.05 }}

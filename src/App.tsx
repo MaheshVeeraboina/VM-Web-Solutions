@@ -17,12 +17,20 @@ import CoachingWebDesign from './pages/CoachingWebDesign';
 import RealEstateWebDesign from './pages/RealEstateWebDesign';
 import { PageTransition } from './components/animations/PageTransition';
 
-// Component to scroll to top on route change
-const ScrollToTop = () => {
-  const { pathname } = useLocation();
+// Component to scroll to top or hash on route change
+const ScrollHandler = () => {
+  const { pathname, hash } = useLocation();
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
+    if (hash) {
+      setTimeout(() => {
+        const id = hash.replace('#', '');
+        const element = document.getElementById(id);
+        if (element) element.scrollIntoView();
+      }, 100);
+    } else {
+      window.scrollTo(0, 0);
+    }
+  }, [pathname, hash]);
   return null;
 };
 
@@ -31,7 +39,7 @@ function App() {
 
   return (
     <div className="font-sans antialiased bg-slate-50 selection:bg-indigo-500/30 overflow-x-hidden">
-      <ScrollToTop />
+      <ScrollHandler />
       <Navbar />
       <FloatingWhatsApp />
       
