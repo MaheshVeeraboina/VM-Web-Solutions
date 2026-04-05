@@ -1,5 +1,6 @@
 import React from 'react';
 import { Mail, Phone, MapPin, Instagram, Linkedin, Twitter } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { Logo } from './icons/Logo';
 
 const Footer = () => {
@@ -34,20 +35,20 @@ const Footer = () => {
             <div>
               <h4 className="text-white font-bold text-lg mb-6">Quick Links</h4>
               <ul className="space-y-3">
-                <li><a href="/#services" className="hover:text-indigo-400 transition-colors">Services</a></li>
-                <li><a href="/#portfolio" className="hover:text-indigo-400 transition-colors">Portfolio</a></li>
-                <li><a href="/#pricing" className="hover:text-indigo-400 transition-colors">Pricing</a></li>
-                <li><a href="/#testimonials" className="hover:text-indigo-400 transition-colors">Testimonials</a></li>
+                <li><Link to="/#services" className="hover:text-indigo-400 transition-colors">Services</Link></li>
+                <li><Link to="/#portfolio" className="hover:text-indigo-400 transition-colors">Portfolio</Link></li>
+                <li><Link to="/#pricing" className="hover:text-indigo-400 transition-colors">Pricing</Link></li>
+                <li><Link to="/#testimonials" className="hover:text-indigo-400 transition-colors">Testimonials</Link></li>
                 <li><a href="https://wa.me/918309358319" className="text-[#25D366] hover:text-white transition-colors font-semibold">WhatsApp Chat</a></li>
               </ul>
             </div>
             <div>
               <h4 className="text-white font-bold text-lg mb-6">Expertise</h4>
               <ul className="space-y-3">
-                <li><a href="/hyderabad-web-design" className="hover:text-indigo-400 transition-colors">Hyderabad Agency</a></li>
-                <li><a href="/gym-website-developer-india" className="hover:text-indigo-400 transition-colors">Gym Website Design</a></li>
-                <li><a href="/coaching-institute-website-development" className="hover:text-indigo-400 transition-colors">Coaching Web Design</a></li>
-                <li><a href="/real-estate-website-design-india" className="hover:text-indigo-400 transition-colors">Real Estate Web Design</a></li>
+                <li><Link to="/hyderabad-web-design" className="hover:text-indigo-400 transition-colors">Hyderabad Agency</Link></li>
+                <li><Link to="/gym-website-developer-india" className="hover:text-indigo-400 transition-colors">Gym Website Design</Link></li>
+                <li><Link to="/coaching-institute-website-development" className="hover:text-indigo-400 transition-colors">Coaching Web Design</Link></li>
+                <li><Link to="/real-estate-website-design-india" className="hover:text-indigo-400 transition-colors">Real Estate Web Design</Link></li>
               </ul>
             </div>
           </div>
@@ -74,8 +75,8 @@ const Footer = () => {
         <div className="pt-8 border-t border-slate-800 text-sm flex flex-col md:flex-row justify-between items-center gap-4">
           <p>&copy; {new Date().getFullYear()} VM Web Solutions. All rights reserved.</p>
           <div className="flex gap-6">
-            <a href="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</a>
-            <a href="/terms-of-service" className="hover:text-white transition-colors">Terms of Service</a>
+            <Link to="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link>
+            <Link to="/terms-of-service" className="hover:text-white transition-colors">Terms of Service</Link>
           </div>
         </div>
       </div>

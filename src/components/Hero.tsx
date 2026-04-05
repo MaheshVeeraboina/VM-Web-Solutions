@@ -63,9 +63,9 @@ const Hero = () => {
 
           <div className="mt-10 flex items-center gap-4 text-sm font-semibold text-slate-500">
             <div className="flex -space-x-3 mr-2">
-              <img src="https://ui-avatars.com/api/?name=MK&background=0D8ABC&color=fff" alt="" loading="lazy" className="w-10 h-10 rounded-full border-2 border-white shadow-sm" />
-              <img src="https://ui-avatars.com/api/?name=VR&background=E53E3E&color=fff" alt="" loading="lazy" className="w-10 h-10 rounded-full border-2 border-white shadow-sm" />
-              <img src="https://ui-avatars.com/api/?name=SJ&background=38A169&color=fff" alt="" loading="lazy" className="w-10 h-10 rounded-full border-2 border-white shadow-sm" />
+              <img src="https://ui-avatars.com/api/?name=MK&background=0D8ABC&color=fff" alt="" width="40" height="40" loading="lazy" className="w-10 h-10 rounded-full border-2 border-white shadow-sm" />
+              <img src="https://ui-avatars.com/api/?name=VR&background=E53E3E&color=fff" alt="" width="40" height="40" loading="lazy" className="w-10 h-10 rounded-full border-2 border-white shadow-sm" />
+              <img src="https://ui-avatars.com/api/?name=SJ&background=38A169&color=fff" alt="" width="40" height="40" loading="lazy" className="w-10 h-10 rounded-full border-2 border-white shadow-sm" />
               <div className="w-10 h-10 rounded-full border-2 border-white bg-slate-100 flex items-center justify-center text-xs text-slate-600 font-bold z-10">+47</div>
             </div>
             <p>Joined by 50+ local businesses</p>
