@@ -3,20 +3,30 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useEffect } from 'react';
+import React, { useEffect, Suspense, lazy } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'motion/react';
 import Navbar from './components/Navbar';
 import FloatingWhatsApp from './components/FloatingWhatsApp';
 import Footer from './components/Footer';
-
-import Home from './pages/Home';
-import HyderabadWebDesign from './pages/HyderabadWebDesign';
-import GymWebDesign from './pages/GymWebDesign';
-import CoachingWebDesign from './pages/CoachingWebDesign';
-import RealEstateWebDesign from './pages/RealEstateWebDesign';
 import { PageTransition } from './components/animations/PageTransition';
 import { trackEvent } from './utils/analytics';
+
+// Component Loading Skeleton
+const PageSkeleton = () => (
+  <div className="min-h-screen bg-slate-50 flex items-center justify-center">
+    <div className="w-8 h-8 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin opacity-50" />
+  </div>
+);
+
+// Eagerly Load Critical Path
+import Home from './pages/Home';
+
+// Lazy Load Chunked Routes
+const HyderabadWebDesign = lazy(() => import('./pages/HyderabadWebDesign'));
+const GymWebDesign = lazy(() => import('./pages/GymWebDesign'));
+const CoachingWebDesign = lazy(() => import('./pages/CoachingWebDesign'));
+const RealEstateWebDesign = lazy(() => import('./pages/RealEstateWebDesign'));
 
 // UTM Tracking Hook
 const UTMTracker = () => {
@@ -43,7 +53,9 @@ const ScrollHandler = () => {
       setTimeout(() => {
         const id = hash.replace('#', '');
         const element = document.getElementById(id);
-        if (element) element.scrollIntoView();
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
       }, 100);
     } else {
       window.scrollTo(0, 0);
@@ -64,13 +76,15 @@ function App() {
       
       <AnimatePresence mode="wait">
         <motion.div key={location.pathname}>
-          <Routes location={location}>
-            <Route path="/" element={<PageTransition><Home /></PageTransition>} />
-            <Route path="/hyderabad-web-design" element={<PageTransition><HyderabadWebDesign /></PageTransition>} />
-            <Route path="/gym-website-developer-india" element={<PageTransition><GymWebDesign /></PageTransition>} />
-            <Route path="/coaching-institute-website-development" element={<PageTransition><CoachingWebDesign /></PageTransition>} />
-            <Route path="/real-estate-website-design-india" element={<PageTransition><RealEstateWebDesign /></PageTransition>} />
-          </Routes>
+          <Suspense fallback={<PageSkeleton />}>
+            <Routes location={location}>
+              <Route path="/" element={<PageTransition><Home /></PageTransition>} />
+              <Route path="/hyderabad-web-design" element={<PageTransition><HyderabadWebDesign /></PageTransition>} />
+              <Route path="/gym-website-developer-india" element={<PageTransition><GymWebDesign /></PageTransition>} />
+              <Route path="/coaching-institute-website-development" element={<PageTransition><CoachingWebDesign /></PageTransition>} />
+              <Route path="/real-estate-website-design-india" element={<PageTransition><RealEstateWebDesign /></PageTransition>} />
+            </Routes>
+          </Suspense>
         </motion.div>
       </AnimatePresence>
 

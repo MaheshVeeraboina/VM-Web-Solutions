@@ -2,50 +2,35 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    
-    <!-- Google Analytics (GA4) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-XXXXXXX');
-    </script>
-
-    <!-- Microsoft Clarity -->
-    <script type="text/javascript">
-      (function(c,l,a,r,i,t,y){
-          c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-          t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-          y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-      })(window, document, "clarity", "script", "YOUR_PROJECT_ID");
-    </script>
-    
-    <!-- Optimized Meta Tags -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>VM Web Solutions</title>
     <meta name="description" content="Affordable website development for small businesses, coaching institutes, and gyms in India. Get a high-converting website that generates WhatsApp leads." />
-    <meta name="keywords" content="website development for small business in india, digital agency for local business, affordable website design india, local seo expert" />
     
-    <link rel="canonical" href="https://vmwebsolutions.com/" />
-    <meta property="og:title" content="Website Development for Small Business in India | VM Web" />
-    <meta property="og:description" content="Generate leads via WhatsApp and calls. High-converting websites designed specifically for local Indian businesses." />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://vmwebsolutions.com/" />
+    <!-- DNS Prefetch & Preconnect for early connections -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.clarity.ms">
 
-    <!-- Google LocalBusiness Schema -->
+    <!-- LCP Image Preload with Fetch Priority -->
+    <link rel="preload" as="image" href="/src/assets/images/desktop-mockup.png" fetchpriority="high">
+
+    <!-- Non-blocking Critical CSS Fonts -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&display=swap" media="print" onload="this.media='all'">
+    <noscript>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&display=swap">
+    </noscript>
+
+    <!-- Schema Markup Execution (Non-blocking by default) -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "LocalBusiness",
       "name": "VM Web Solutions",
       "image": "https://vmwebsolutions.com/logo.png",
-      "description": "High-converting website development and local SEO services for Indian small businesses, coaching institutes, and gyms.",
+      "description": "High-converting website development and local SEO services for Indian small businesses.",
       "url": "https://vmwebsolutions.com/",
       "telephone": "+918309358319",
       "address": {
@@ -54,62 +39,38 @@
         "addressRegion": "Telangana",
         "addressCountry": "IN"
       },
-      "priceRange": "₹4,999 - ₹19,999",
-      "areaServed": "India"
-    }
-    </script>
-
-    <!-- Professional Service Schema -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Service",
-      "serviceType": "Web Development",
-      "provider": {
-        "@type": "LocalBusiness",
-        "name": "VM Web Solutions"
-      },
-      "areaServed": {
-        "@type": "Country",
-        "name": "India"
-      },
-      "description": "Custom, mobile-first website design and development aimed at generating absolute leads for local businesses via WhatsApp."
-    }
-    </script>
-    
-    <!-- FAQ Schema -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [{
-        "@type": "Question",
-        "name": "Do I really need a website if I already use WhatsApp and Facebook?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Yes. While WhatsApp and Facebook are great for talking to people you already know, a high-converting website helps people who don't know you find your local business on Google."
-        }
-      }, {
-        "@type": "Question",
-        "name": "How long does it take to develop a small business website in India?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Your custom, SEO-optimized website will typically go live within 7 to 14 days."
-        }
-      }, {
-        "@type": "Question",
-        "name": "Are your website design prices affordable for local businesses?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Absolutely. We designed our pricing specifically for Indian local businesses like coaching centers, real estate agents, and gyms starting at ₹4,999."
-        }
-      }]
+      "priceRange": "₹4,999 - ₹19,999"
     }
     </script>
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+
+    <!-- Deferred Analytics Injection -->
+    <script>
+      window.addEventListener('load', () => {
+        // Delay analytics parsing until critical thread is idle
+        requestIdleCallback(() => {
+          // Google Analytics
+          const ga = document.createElement('script');
+          ga.src = 'https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX';
+          ga.async = true;
+          document.body.appendChild(ga);
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-XXXXXXX');
+
+          // Clarity
+          (function(c,l,a,r,i,t,y){
+              c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+              t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+              y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+          })(window, document, "clarity", "script", "YOUR_PROJECT_ID");
+        });
+      });
+    </script>
   </body>
 </html>
 
