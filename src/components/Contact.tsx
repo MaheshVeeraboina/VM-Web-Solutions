@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import emailjs from '@emailjs/browser';
 import { Mail, Phone, User, CheckCircle2, X } from 'lucide-react';
 import { motion } from 'motion/react';
@@ -6,9 +6,33 @@ import { trackEvent } from '../utils/analytics';
 
 const Contact = () => {
   const formRef = useRef<HTMLFormElement>(null);
+  const containerRef = useRef<HTMLElement>(null);
   const [formState, setFormState] = useState({ name: '', email: '', phone: '', business: '', message: '' });
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [phoneError, setPhoneError] = useState(false);
+  const [hasInteracted, setHasInteracted] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          trackEvent('view_contact_form', { event_category: 'engagement' });
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.5 }
+    );
+
+    if (containerRef.current) observer.observe(containerRef.current);
+    return () => observer.disconnect();
+  }, []);
+
+  const handleFocus = () => {
+    if (!hasInteracted) {
+      trackEvent('contact_form_interaction', { event_category: 'intent' });
+      setHasInteracted(true);
+    }
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -44,7 +68,7 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="py-24 px-6 bg-slate-50 relative overflow-hidden">
+    <section ref={containerRef} id="contact" className="py-24 px-6 bg-slate-50 relative overflow-hidden">
       <div className="absolute top-0 right-0 w-96 h-96 bg-indigo-500/5 rounded-full blur-3xl pointer-events-none"></div>
       
       <div className="max-w-7xl mx-auto relative z-10">
@@ -109,7 +133,7 @@ const Contact = () => {
                   <label className="block text-sm font-bold text-slate-700 mb-2">Full Name</label>
                   <div className="relative">
                     <User size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" />
-                    <input required name="user_name" type="text" placeholder="John Doe" className="w-full pl-12 pr-4 py-4 rounded-xl bg-slate-50 border border-slate-200 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 outline-none transition-all" value={formState.name} onChange={(e) => setFormState({...formState, name: e.target.value})} />
+                    <input required name="user_name" type="text" onFocus={handleFocus} placeholder="John Doe" className="w-full pl-12 pr-4 py-4 rounded-xl bg-slate-50 border border-slate-200 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 outline-none transition-all" value={formState.name} onChange={(e) => setFormState({...formState, name: e.target.value})} />
                   </div>
                 </div>
 
@@ -117,7 +141,7 @@ const Contact = () => {
                   <label className="block text-sm font-bold text-slate-700 mb-2">Email Address</label>
                   <div className="relative">
                     <Mail size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" />
-                    <input required name="user_email" type="email" placeholder="john@example.com" className="w-full pl-12 pr-4 py-4 rounded-xl bg-slate-50 border border-slate-200 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 outline-none transition-all" value={formState.email} onChange={(e) => setFormState({...formState, email: e.target.value})} />
+                    <input required name="user_email" type="email" onFocus={handleFocus} placeholder="john@example.com" className="w-full pl-12 pr-4 py-4 rounded-xl bg-slate-50 border border-slate-200 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 outline-none transition-all" value={formState.email} onChange={(e) => setFormState({...formState, email: e.target.value})} />
                   </div>
                 </div>
 
@@ -125,7 +149,7 @@ const Contact = () => {
                   <label className="block text-sm font-bold text-slate-700 mb-2">Phone Number</label>
                   <div className="relative">
                     <Phone size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" />
-                    <input required name="user_phone" type="tel" maxLength={15} placeholder="+91 00000 00000" className={`w-full pl-12 pr-4 py-4 rounded-xl bg-slate-50 border ${phoneError ? 'border-red-500' : 'border-slate-200'} focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 outline-none transition-all`} value={formState.phone} onChange={(e) => setFormState({...formState, phone: e.target.value.replace(/[^0-9+\s-]/g, '')})} />
+                    <input required name="user_phone" type="tel" maxLength={15} onFocus={handleFocus} placeholder="+91 00000 00000" className={`w-full pl-12 pr-4 py-4 rounded-xl bg-slate-50 border ${phoneError ? 'border-red-500' : 'border-slate-200'} focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 outline-none transition-all`} value={formState.phone} onChange={(e) => setFormState({...formState, phone: e.target.value.replace(/[^0-9+\s-]/g, '')})} />
                   </div>
                   {phoneError && <p className="text-red-500 text-xs font-bold mt-2">Please enter a valid phone number (at least 10 digits).</p>}
                 </div>
