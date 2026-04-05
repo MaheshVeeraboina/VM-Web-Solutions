@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react';
 import emailjs from '@emailjs/browser';
 import { Mail, Phone, User, CheckCircle2, X } from 'lucide-react';
 import { motion } from 'motion/react';
+import { trackEvent } from '../utils/analytics';
 
 const Contact = () => {
   const formRef = useRef<HTMLFormElement>(null);
@@ -28,6 +29,10 @@ const Contact = () => {
 
     emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, formRef.current, PUBLIC_KEY)
       .then(() => {
+        trackEvent('contact_form_submit', {
+          event_category: 'engagement',
+          event_label: 'contact_form'
+        });
         setStatus('success');
         const whatsappMessage = encodeURIComponent(`Hi VM Web Solutions, I'm ${formState.name}. I just submitted a request on your website for my business. Let's discuss!`);
         window.open(`https://wa.me/918309358319?text=${whatsappMessage}`, "_blank");

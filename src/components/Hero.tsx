@@ -6,6 +6,7 @@ import desktopWebp from '@/assets/images/desktop-mockup.png?w=400;800;1200&forma
 import desktopSrc from '@/assets/images/desktop-mockup.png?w=1200&as=src';
 import desktopLqip from '@/assets/images/desktop-mockup.png?w=20&format=webp&blur=10&inline';
 import { OptimizedPicture } from './ui/OptimizedPicture';
+import { trackEvent } from '../utils/analytics';
 
 const Hero = () => {
   return (
@@ -49,12 +50,14 @@ const Hero = () => {
               href="https://wa.me/918309358319?text=I'm%20interested%20in%20getting%20more%20leads.%20Can%20we%20chat?" 
               target="_blank"
               rel="noreferrer"
+              onClick={() => trackEvent('cta_click', { event_category: 'conversion', event_label: 'hero_cta_primary' })}
               className="w-full sm:w-auto bg-slate-900 hover:bg-slate-800 text-white px-8 py-4 rounded-xl font-bold text-lg flex items-center justify-center gap-2 transition-all shadow-xl shadow-slate-900/10 hover:-translate-y-0.5"
             >
               Get More Customers <ArrowRight size={20} />
             </a>
             <a 
               href="#portfolio" 
+              onClick={() => trackEvent('cta_click', { event_category: 'engagement', event_label: 'hero_cta_secondary' })}
               className="w-full sm:w-auto bg-white hover:bg-slate-50 border border-slate-200 text-slate-800 px-8 py-4 rounded-xl font-bold text-lg flex items-center justify-center gap-2 transition-all shadow-sm group"
             >
               <PlayCircle size={20} className="text-indigo-600 group-hover:scale-110 transition-transform" />

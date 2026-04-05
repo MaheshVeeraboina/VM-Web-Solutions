@@ -2,6 +2,7 @@ import React from 'react';
 import { Check, Info } from 'lucide-react';
 import { FadeIn } from './animations/FadeIn';
 import { StaggerContainer, StaggerItem } from './animations/Stagger';
+import { trackEvent } from '../utils/analytics';
 
 const Pricing = () => {
   const plans = [
@@ -65,7 +66,10 @@ const Pricing = () => {
           </p>
         </FadeIn>
 
-        <StaggerContainer className="grid lg:grid-cols-3 gap-8 items-center max-w-6xl mx-auto">
+        <StaggerContainer 
+          className="grid lg:grid-cols-3 gap-8 items-center max-w-6xl mx-auto"
+          onViewportEnter={() => trackEvent('view_pricing', { event_category: 'engagement' })}
+        >
           {plans.map((p, i) => (
             <StaggerItem 
               key={i}
@@ -95,6 +99,7 @@ const Pricing = () => {
                 href={`https://wa.me/918309358319?text=I'm%20interested%20in%20the%20${p.name}%20plan%20for%20%E2%82%B9${p.price}`}
                 target="_blank"
                 rel="noreferrer"
+                onClick={() => trackEvent('cta_click', { event_category: 'conversion', event_label: `pricing_cta_${p.name.toLowerCase()}` })}
                 className={`w-full py-4 rounded-xl font-bold text-center block mb-8 transition-all ${
                   p.popular 
                     ? 'bg-indigo-600 hover:bg-indigo-700 text-white shadow-lg hover:shadow-indigo-500/25' 
