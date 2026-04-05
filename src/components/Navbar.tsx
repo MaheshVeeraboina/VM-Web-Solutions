@@ -26,8 +26,11 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
         <Link to="/" className="flex items-center gap-3" aria-label="Go to homepage" onClick={() => setIsOpen(false)}>
           <Logo width={42} height={42} className="text-slate-900" />
-          <span className="font-extrabold text-2xl tracking-tight text-slate-900 font-heading hidden sm:block">
-            VM Web <span className="text-indigo-600">Solutions</span>
+          <span className="font-extrabold text-2xl tracking-tight font-heading hidden sm:block">
+            <span className="bg-gradient-to-r from-[#3B82F6] to-[#9333EA] bg-clip-text text-transparent">V</span>
+            <span className="text-slate-900">M</span> 
+            <span className="text-slate-900"> Web </span>
+            <span className="text-indigo-600">Solutions</span>
           </span>
         </Link>
 
