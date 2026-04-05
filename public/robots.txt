@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://vmwebsolutions.com/sitemap.xml
+Sitemap: https://vmwebsolutions.in/sitemap.xml
