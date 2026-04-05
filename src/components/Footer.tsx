@@ -18,13 +18,13 @@ const Footer = () => {
               We help local Indian businesses build a commanding online presence, get found on Google, and convert website visitors into paying customers.
             </p>
             <div className="flex gap-4">
-              <a href="#" className="w-10 h-10 bg-slate-900 rounded-lg flex items-center justify-center hover:bg-indigo-600 hover:text-white transition-colors">
+              <a href="https://instagram.com" target="_blank" rel="noreferrer" aria-label="Instagram" className="w-10 h-10 bg-slate-900 rounded-lg flex items-center justify-center hover:bg-indigo-600 hover:text-white transition-colors">
                 <Instagram size={20} />
               </a>
-              <a href="#" className="w-10 h-10 bg-slate-900 rounded-lg flex items-center justify-center hover:bg-indigo-600 hover:text-white transition-colors">
+              <a href="https://linkedin.com" target="_blank" rel="noreferrer" aria-label="LinkedIn" className="w-10 h-10 bg-slate-900 rounded-lg flex items-center justify-center hover:bg-indigo-600 hover:text-white transition-colors">
                 <Linkedin size={20} />
               </a>
-              <a href="#" className="w-10 h-10 bg-slate-900 rounded-lg flex items-center justify-center hover:bg-indigo-600 hover:text-white transition-colors">
+              <a href="https://twitter.com" target="_blank" rel="noreferrer" aria-label="Twitter" className="w-10 h-10 bg-slate-900 rounded-lg flex items-center justify-center hover:bg-indigo-600 hover:text-white transition-colors">
                 <Twitter size={20} />
               </a>
             </div>
@@ -74,8 +74,8 @@ const Footer = () => {
         <div className="pt-8 border-t border-slate-800 text-sm flex flex-col md:flex-row justify-between items-center gap-4">
           <p>&copy; {new Date().getFullYear()} VM Web Solutions. All rights reserved.</p>
           <div className="flex gap-6">
-            <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
+            <a href="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</a>
+            <a href="/terms-of-service" className="hover:text-white transition-colors">Terms of Service</a>
           </div>
         </div>
       </div>

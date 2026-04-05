@@ -48,7 +48,10 @@ const Contact = () => {
 
     setStatus('loading');
 
-    if (formState.phone.replace(/\D/g, '').length < 10) {
+    const cleanedPhone = formState.phone.replace(/\D/g, '');
+    const phoneToTest = cleanedPhone.length > 10 && cleanedPhone.startsWith('91') ? cleanedPhone.slice(2) : cleanedPhone;
+    
+    if (!/^[6-9]\d{9}$/.test(phoneToTest)) {
       setPhoneError(true);
       setStatus('idle');
       return;
@@ -166,7 +169,7 @@ const Contact = () => {
                     <Phone size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" />
                     <input required name="user_phone" type="tel" maxLength={15} onFocus={handleFocus} placeholder="+91 00000 00000" className={`w-full pl-12 pr-4 py-4 rounded-xl bg-slate-50 border ${phoneError ? 'border-red-500' : 'border-slate-200'} focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 outline-none transition-all`} value={formState.phone} onChange={(e) => setFormState({...formState, phone: e.target.value.replace(/[^0-9+\s-]/g, '')})} />
                   </div>
-                  {phoneError && <p className="text-red-500 text-xs font-bold mt-2">Please enter a valid phone number (at least 10 digits).</p>}
+                  {phoneError && <p className="text-red-500 text-xs font-bold mt-2">Please enter a valid 10-digit Indian phone number.</p>}
                 </div>
 
                 <button 

@@ -27,10 +27,14 @@ const HyderabadWebDesign = lazy(() => import('./pages/HyderabadWebDesign'));
 const GymWebDesign = lazy(() => import('./pages/GymWebDesign'));
 const CoachingWebDesign = lazy(() => import('./pages/CoachingWebDesign'));
 const RealEstateWebDesign = lazy(() => import('./pages/RealEstateWebDesign'));
+const NotFound = lazy(() => import('./pages/NotFound'));
+const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'));
+const TermsOfService = lazy(() => import('./pages/TermsOfService'));
 
 // UTM Tracking Hook
 const UTMTracker = () => {
   useEffect(() => {
+    if (!import.meta.env.PROD) return;
     const params = new URLSearchParams(window.location.search);
     const source = params.get('utm_source');
     if (source && !sessionStorage.getItem('utm_tracked')) {
@@ -83,6 +87,9 @@ function App() {
               <Route path="/gym-website-developer-india" element={<PageTransition><GymWebDesign /></PageTransition>} />
               <Route path="/coaching-institute-website-development" element={<PageTransition><CoachingWebDesign /></PageTransition>} />
               <Route path="/real-estate-website-design-india" element={<PageTransition><RealEstateWebDesign /></PageTransition>} />
+              <Route path="/privacy-policy" element={<PageTransition><PrivacyPolicy /></PageTransition>} />
+              <Route path="/terms-of-service" element={<PageTransition><TermsOfService /></PageTransition>} />
+              <Route path="*" element={<PageTransition><NotFound /></PageTransition>} />
             </Routes>
           </Suspense>
         </motion.div>

@@ -1,11 +1,7 @@
+import heroImage from '@/assets/images/desktop-mockup.webp';
 import React, { useState } from 'react';
 import { ArrowRight, CheckCircle2, MapPin, Search, Smartphone, ChartBar, Plus, Minus } from 'lucide-react';
 import { motion } from 'motion/react';
-import desktopAvif from '@/assets/images/desktop-mockup.png?w=400;800;1200&format=avif&as=srcset';
-import desktopWebp from '@/assets/images/desktop-mockup.png?w=400;800;1200&format=webp&as=srcset';
-import desktopSrc from '@/assets/images/desktop-mockup.png?w=1200&as=src';
-import desktopLqip from '@/assets/images/desktop-mockup.png?w=20&format=webp&blur=10&inline';
-import { OptimizedPicture } from '../components/ui/OptimizedPicture';
 
 const HyderabadWebDesign = () => {
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
@@ -70,18 +66,7 @@ const HyderabadWebDesign = () => {
               className="relative hidden lg:block"
             >
               <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl border-4 border-white/50 relative z-10 bg-slate-100">
-                <OptimizedPicture 
-                  avifSrcSet={desktopAvif}
-                  webpSrcSet={desktopWebp}
-                  fallbackSrc={desktopSrc}
-                  lqip={desktopLqip}
-                  alt="Hyderabad Web Design Mockup"
-                  className="w-full h-full object-cover"
-                  pictureClassName="w-full h-full"
-                  fetchPriority="high"
-                  loading="eager"
-                  decoding="sync"
-                />
+                <img src={heroImage} alt="Hyderabad Web Design Mockup" width="1200" height="800" fetchPriority="high" loading="eager" decoding="sync" className="w-full h-full object-cover" />
               </div>
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-gradient-to-br from-indigo-500/20 to-purple-500/20 blur-3xl -z-10 rounded-full" />
             </motion.div>

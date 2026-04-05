@@ -1,11 +1,7 @@
+import heroImage from '@/assets/images/real-estate-mockup.webp';
 import React, { useState } from 'react';
 import { ArrowRight, CheckCircle2, Building, Map, Key, Search, Plus, Minus } from 'lucide-react';
 import { motion } from 'motion/react';
-import desktopAvif from '@/assets/images/real-estate-mockup.png?w=400;800;1200&format=avif&as=srcset';
-import desktopWebp from '@/assets/images/real-estate-mockup.png?w=400;800;1200&format=webp&as=srcset';
-import desktopSrc from '@/assets/images/real-estate-mockup.png?w=1200&as=src';
-import desktopLqip from '@/assets/images/real-estate-mockup.png?w=20&format=webp&blur=10&inline';
-import { OptimizedPicture } from '../components/ui/OptimizedPicture';
 
 const RealEstateWebDesign = () => {
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
@@ -70,18 +66,7 @@ const RealEstateWebDesign = () => {
               className="relative hidden lg:block"
             >
               <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl border-4 border-white/50 relative z-10 bg-slate-900">
-                <OptimizedPicture 
-                  avifSrcSet={desktopAvif}
-                  webpSrcSet={desktopWebp}
-                  fallbackSrc={desktopSrc}
-                  lqip={desktopLqip}
-                  alt="Real Estate Web Design Mockup"
-                  className="w-full h-full object-cover"
-                  pictureClassName="w-full h-full"
-                  fetchPriority="high"
-                  loading="eager"
-                  decoding="sync"
-                />
+                <img src={heroImage} alt="Real Estate Web Design Mockup" width="1200" height="800" fetchPriority="high" loading="eager" decoding="sync" className="w-full h-full object-cover" />
               </div>
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-gradient-to-br from-amber-500/20 to-orange-500/20 blur-3xl -z-10 rounded-full" />
             </motion.div>

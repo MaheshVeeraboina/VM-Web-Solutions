@@ -1,11 +1,7 @@
+import heroImage from '@/assets/images/desktop-mockup.webp';
 import React from 'react';
 import { ArrowRight, MessageSquare, Star, PlayCircle } from 'lucide-react';
 import { motion } from 'motion/react';
-import desktopAvif from '@/assets/images/desktop-mockup.png?w=400;800;1200&format=avif&as=srcset';
-import desktopWebp from '@/assets/images/desktop-mockup.png?w=400;800;1200&format=webp&as=srcset';
-import desktopSrc from '@/assets/images/desktop-mockup.png?w=1200&as=src';
-import desktopLqip from '@/assets/images/desktop-mockup.png?w=20&format=webp&blur=10&inline';
-import { OptimizedPicture } from './ui/OptimizedPicture';
 import { trackEvent } from '../utils/analytics';
 
 const Hero = () => {
@@ -67,9 +63,9 @@ const Hero = () => {
 
           <div className="mt-10 flex items-center gap-4 text-sm font-semibold text-slate-500">
             <div className="flex -space-x-3 mr-2">
-              <img src="https://ui-avatars.com/api/?name=MK&background=0D8ABC&color=fff" alt="User" loading="lazy" className="w-10 h-10 rounded-full border-2 border-white shadow-sm" />
-              <img src="https://ui-avatars.com/api/?name=VR&background=E53E3E&color=fff" alt="User" loading="lazy" className="w-10 h-10 rounded-full border-2 border-white shadow-sm" />
-              <img src="https://ui-avatars.com/api/?name=SJ&background=38A169&color=fff" alt="User" loading="lazy" className="w-10 h-10 rounded-full border-2 border-white shadow-sm" />
+              <img src="https://ui-avatars.com/api/?name=MK&background=0D8ABC&color=fff" alt="" loading="lazy" className="w-10 h-10 rounded-full border-2 border-white shadow-sm" />
+              <img src="https://ui-avatars.com/api/?name=VR&background=E53E3E&color=fff" alt="" loading="lazy" className="w-10 h-10 rounded-full border-2 border-white shadow-sm" />
+              <img src="https://ui-avatars.com/api/?name=SJ&background=38A169&color=fff" alt="" loading="lazy" className="w-10 h-10 rounded-full border-2 border-white shadow-sm" />
               <div className="w-10 h-10 rounded-full border-2 border-white bg-slate-100 flex items-center justify-center text-xs text-slate-600 font-bold z-10">+47</div>
             </div>
             <p>Joined by 50+ local businesses</p>
@@ -94,18 +90,7 @@ const Hero = () => {
                 <div className="w-3 h-3 rounded-full bg-emerald-400"></div>
               </div>
               {/* Content */}
-              <OptimizedPicture 
-                avifSrcSet={desktopAvif}
-                webpSrcSet={desktopWebp}
-                fallbackSrc={desktopSrc}
-                lqip={desktopLqip}
-                alt="Web App Mockup"
-                fetchPriority="high"
-                loading="eager"
-                decoding="sync"
-                className="w-full h-full object-cover"
-                pictureClassName="w-full h-full"
-              />
+              <img src={heroImage} alt="Web App Mockup" width="1200" height="800" fetchPriority="high" loading="eager" decoding="sync" className="w-full h-full object-cover" />
             </div>
 
 
