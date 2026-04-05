@@ -10,28 +10,35 @@ const Contact = () => {
   const [formState, setFormState] = useState({ name: '', email: '', phone: '', business: '', message: '' });
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [phoneError, setPhoneError] = useState(false);
-  const [hasInteracted, setHasInteracted] = useState(false);
 
   useEffect(() => {
+    let timeout: ReturnType<typeof setTimeout>;
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          trackEvent('view_contact_form', { event_category: 'engagement' });
-          observer.disconnect();
+          timeout = setTimeout(() => {
+            trackEvent('view_contact_form', { event_category: 'engagement' });
+            observer.disconnect();
+          }, 1500);
+        } else {
+          clearTimeout(timeout);
         }
       },
       { threshold: 0.5 }
     );
 
     if (containerRef.current) observer.observe(containerRef.current);
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+      clearTimeout(timeout);
+    };
   }, []);
 
   const handleFocus = () => {
-    if (!hasInteracted) {
-      trackEvent('contact_form_interaction', { event_category: 'intent' });
-      setHasInteracted(true);
-    }
+    if (sessionStorage.getItem('contact_interacted')) return;
+    sessionStorage.setItem('contact_interacted', 'true');
+    trackEvent('contact_form_interaction', { event_category: 'intent' });
   };
 
   const handleSubmit = (e: React.FormEvent) => {
