@@ -4,9 +4,10 @@ import { motion, useReducedMotion } from 'motion/react';
 interface StaggerContainerProps {
   children: React.ReactNode;
   className?: string;
+  onViewportEnter?: () => void;
 }
 
-export const StaggerContainer: React.FC<StaggerContainerProps> = ({ children, className = "" }) => {
+export const StaggerContainer: React.FC<StaggerContainerProps> = ({ children, className = "", onViewportEnter }) => {
   const shouldReduceMotion = useReducedMotion();
 
   const containerVariants = {
@@ -26,6 +27,7 @@ export const StaggerContainer: React.FC<StaggerContainerProps> = ({ children, cl
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.1 }}
+      onViewportEnter={onViewportEnter}
       className={className}
     >
       {children}
