@@ -58,11 +58,15 @@ const Contact = () => {
     const TEMPLATE_ID = 'template_otynsid';
     const PUBLIC_KEY = 'xURJIlj4p-DZabNey';
 
+    const start = performance.now();
+
     emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, formRef.current, PUBLIC_KEY)
       .then(() => {
+        const duration = Math.round(performance.now() - start);
         trackEvent('contact_form_submit', {
-          event_category: 'engagement',
-          event_label: 'contact_form'
+          event_category: 'conversion',
+          event_label: 'contact_form',
+          duration_ms: duration
         });
         setStatus('success');
         const whatsappMessage = encodeURIComponent(`Hi VM Web Solutions, I'm ${formState.name}. I just submitted a request on your website for my business. Let's discuss!`);
@@ -70,6 +74,10 @@ const Contact = () => {
       })
       .catch((err) => {
         console.error(err);
+        trackEvent('contact_form_error', {
+          event_category: 'error',
+          error_type: err?.text || 'emailjs_failed'
+        });
         setStatus('error');
       });
   };
