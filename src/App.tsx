@@ -11,6 +11,8 @@ import FloatingWhatsApp from './components/FloatingWhatsApp';
 import Footer from './components/Footer';
 import { PageTransition } from './components/animations/PageTransition';
 import { trackEvent } from './utils/analytics';
+import ErrorBoundary from './components/ErrorBoundary';
+import { SEOHelmet } from './components/SEOHelmet';
 
 // Component Loading Skeleton
 const PageSkeleton = () => (
@@ -80,18 +82,20 @@ function App() {
       
       <AnimatePresence mode="wait">
         <motion.div key={location.pathname}>
-          <Suspense fallback={<PageSkeleton />}>
-            <Routes location={location}>
-              <Route path="/" element={<PageTransition><Home /></PageTransition>} />
-              <Route path="/hyderabad-web-design" element={<PageTransition><HyderabadWebDesign /></PageTransition>} />
-              <Route path="/gym-website-developer-india" element={<PageTransition><GymWebDesign /></PageTransition>} />
-              <Route path="/coaching-institute-website-development" element={<PageTransition><CoachingWebDesign /></PageTransition>} />
-              <Route path="/real-estate-website-design-india" element={<PageTransition><RealEstateWebDesign /></PageTransition>} />
-              <Route path="/privacy-policy" element={<PageTransition><PrivacyPolicy /></PageTransition>} />
-              <Route path="/terms-of-service" element={<PageTransition><TermsOfService /></PageTransition>} />
-              <Route path="*" element={<PageTransition><NotFound /></PageTransition>} />
-            </Routes>
-          </Suspense>
+          <ErrorBoundary>
+            <Suspense fallback={<PageSkeleton />}>
+              <Routes location={location}>
+                <Route path="/" element={<SEOHelmet title="Best Web Design Agency" description="High-converting website development for local Indian businesses."><PageTransition><Home /></PageTransition></SEOHelmet>} />
+                <Route path="/hyderabad-web-design" element={<SEOHelmet title="Hyderabad Web Design Agency" description="Top-rated web designers in Hyderabad producing WhatsApp leads."><PageTransition><HyderabadWebDesign /></PageTransition></SEOHelmet>} />
+                <Route path="/gym-website-developer-india" element={<SEOHelmet title="Gym Website Developer India" description="Premium website designs for Fitness centers and Gyms."><PageTransition><GymWebDesign /></PageTransition></SEOHelmet>} />
+                <Route path="/coaching-institute-website-development" element={<SEOHelmet title="Coaching Institute Web Design" description="Direct admissions and student portfolios via stunning digital prospectuses."><PageTransition><CoachingWebDesign /></PageTransition></SEOHelmet>} />
+                <Route path="/real-estate-website-design-india" element={<SEOHelmet title="Real Estate Web Design" description="Reduce CPL by 50% with targeted Real Estate landing pages."><PageTransition><RealEstateWebDesign /></PageTransition></SEOHelmet>} />
+                <Route path="/privacy-policy" element={<SEOHelmet title="Privacy Policy"><PageTransition><PrivacyPolicy /></PageTransition></SEOHelmet>} />
+                <Route path="/terms-of-service" element={<SEOHelmet title="Terms of Service"><PageTransition><TermsOfService /></PageTransition></SEOHelmet>} />
+                <Route path="*" element={<SEOHelmet title="404 Not Found"><PageTransition><NotFound /></PageTransition></SEOHelmet>} />
+              </Routes>
+            </Suspense>
+          </ErrorBoundary>
         </motion.div>
       </AnimatePresence>
 
