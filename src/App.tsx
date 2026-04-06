@@ -55,16 +55,19 @@ const UTMTracker = () => {
 const ScrollHandler = () => {
   const { pathname, hash } = useLocation();
   useEffect(() => {
+    // Always scroll to top instantly on any navigation.
+    // This prevents the footer from staying visible during AnimatePresence exit.
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+
     if (hash) {
+      // Wait for AnimatePresence exit (250ms) + new page mount before scrolling to hash
       setTimeout(() => {
         const id = hash.replace('#', '');
         const element = document.getElementById(id);
         if (element) {
           element.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
-      }, 100);
-    } else {
-      window.scrollTo(0, 0);
+      }, 400);
     }
   }, [pathname, hash]);
   return null;
