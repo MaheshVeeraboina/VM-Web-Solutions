@@ -1,4 +1,7 @@
-import heroImage from '@/assets/images/desktop-mockup.webp';
+// Use public path to match the <link rel="preload"> in index.html.
+// This eliminates the ~800ms delay from waiting for React to render.
+const heroImage = '/images/desktop-mockup.webp';
+import { AVATAR_MK, AVATAR_VR, AVATAR_SJ } from '../utils/avatars';
 import React from 'react';
 import { ArrowRight, MessageSquare, Star, PlayCircle } from 'lucide-react';
 import { motion } from 'motion/react';
@@ -63,9 +66,9 @@ const Hero = () => {
 
           <div className="mt-10 flex items-center gap-4 text-sm font-semibold text-slate-500">
             <div className="flex -space-x-3 mr-2">
-              <img src="https://ui-avatars.com/api/?name=MK&background=0D8ABC&color=fff" alt="" width="40" height="40" loading="lazy" className="w-10 h-10 rounded-full border-2 border-white shadow-sm" />
-              <img src="https://ui-avatars.com/api/?name=VR&background=E53E3E&color=fff" alt="" width="40" height="40" loading="lazy" className="w-10 h-10 rounded-full border-2 border-white shadow-sm" />
-              <img src="https://ui-avatars.com/api/?name=SJ&background=38A169&color=fff" alt="" width="40" height="40" loading="lazy" className="w-10 h-10 rounded-full border-2 border-white shadow-sm" />
+              <img src={AVATAR_MK} alt="" width="40" height="40" className="w-10 h-10 rounded-full border-2 border-white shadow-sm" />
+              <img src={AVATAR_VR} alt="" width="40" height="40" className="w-10 h-10 rounded-full border-2 border-white shadow-sm" />
+              <img src={AVATAR_SJ} alt="" width="40" height="40" className="w-10 h-10 rounded-full border-2 border-white shadow-sm" />
               <div className="w-10 h-10 rounded-full border-2 border-white bg-slate-100 flex items-center justify-center text-xs text-slate-600 font-bold z-10">+47</div>
             </div>
             <p>Joined by 50+ local businesses</p>

@@ -2,6 +2,7 @@ import React from 'react';
 import { Star, Quote } from 'lucide-react';
 import { FadeIn } from './animations/FadeIn';
 import { StaggerContainer, StaggerItem } from './animations/Stagger';
+import { AVATAR_RAMESH, AVATAR_LAKSHMI, AVATAR_SURESH } from '../utils/avatars';
 
 const Testimonials = () => {
   const reviews = [
@@ -9,19 +10,19 @@ const Testimonials = () => {
       name: "Ramesh Kumar",
       role: "Owner, RK Fitness Studo",
       text: "I was struggling to get new gym memberships. VM Web Solutions built a landing page for us, and within 2 weeks, we got 45 new direct WhatsApp inquiries. The investment paid for itself in less than a month.",
-      image: "https://ui-avatars.com/api/?name=Ramesh+Kumar&background=4f46e5&color=fff&size=100"
+      image: AVATAR_RAMESH
     },
     {
       name: "Lakshmi Narayana",
       role: "Director, Excellence Academy",
       text: "Our old website was just an online brochure. After they redesigned it and added lead capture forms, our student admissions increased by 60% compared to last year. Very professional and fast delivery.",
-      image: "https://ui-avatars.com/api/?name=Lakshmi+Narayana&background=0f172a&color=fff&size=100"
+      image: AVATAR_LAKSHMI
     },
     {
       name: "Suresh Reddy",
       role: "Founder, VR Properties",
       text: "Real estate leads are expensive, but thanks to the specific property landing pages they created, our Cost Per Lead dropped by half. The fast loading speed on mobile made a huge difference.",
-      image: "https://ui-avatars.com/api/?name=Suresh+Reddy&background=059669&color=fff&size=100"
+      image: AVATAR_SURESH
     }
   ];
 
