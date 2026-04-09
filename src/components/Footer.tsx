@@ -1,5 +1,5 @@
 import React from 'react';
-import { Mail, Phone, MapPin, Instagram, Linkedin, Twitter } from 'lucide-react';
+import { Mail, Phone, MapPin, Instagram, Linkedin, Twitter, Youtube } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import { Logo } from './icons/Logo';
 
@@ -25,14 +25,17 @@ const Footer = () => {
               We help local Indian businesses build a commanding online presence, get found on Google, and convert website visitors into paying customers.
             </p>
             <div className="flex gap-4">
-              <a href="https://instagram.com" target="_blank" rel="noreferrer" aria-label="Instagram" className="w-10 h-10 bg-slate-900 rounded-lg flex items-center justify-center hover:bg-indigo-600 hover:text-white transition-colors">
+              <a href="https://instagram.com/vmwebsolutions" target="_blank" rel="noreferrer" aria-label="Instagram" className="w-10 h-10 bg-slate-900 rounded-lg flex items-center justify-center hover:bg-indigo-600 hover:text-white transition-colors">
                 <Instagram size={20} />
               </a>
-              <a href="https://linkedin.com" target="_blank" rel="noreferrer" aria-label="LinkedIn" className="w-10 h-10 bg-slate-900 rounded-lg flex items-center justify-center hover:bg-indigo-600 hover:text-white transition-colors">
+              <a href="https://linkedin.com/company/vmwebsolutions" target="_blank" rel="noreferrer" aria-label="LinkedIn" className="w-10 h-10 bg-slate-900 rounded-lg flex items-center justify-center hover:bg-indigo-600 hover:text-white transition-colors">
                 <Linkedin size={20} />
               </a>
-              <a href="https://twitter.com" target="_blank" rel="noreferrer" aria-label="Twitter" className="w-10 h-10 bg-slate-900 rounded-lg flex items-center justify-center hover:bg-indigo-600 hover:text-white transition-colors">
+              <a href="https://twitter.com/vmwebsolutions" target="_blank" rel="noreferrer" aria-label="Twitter" className="w-10 h-10 bg-slate-900 rounded-lg flex items-center justify-center hover:bg-indigo-600 hover:text-white transition-colors">
                 <Twitter size={20} />
+              </a>
+              <a href="https://youtube.com/vmwebsolutions" target="_blank" rel="noreferrer" aria-label="YouTube" className="w-10 h-10 bg-slate-900 rounded-lg flex items-center justify-center hover:bg-indigo-600 hover:text-white transition-colors">
+                <Youtube size={20} />
               </a>
             </div>
           </div>

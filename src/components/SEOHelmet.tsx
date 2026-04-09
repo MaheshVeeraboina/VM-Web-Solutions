@@ -31,7 +31,13 @@ export const SEOHelmet: React.FC<SEOProps> = ({ title, description, image, child
     const fullTitle = `${title} | VM Web Solutions`;
     document.title = fullTitle;
 
-    const metaDescription = description || 'Fast website design in Hyderabad for local businesses with strong local SEO and WhatsApp lead generation.';
+    const maxLength = 155;
+    const defaultDescription = 'Hyderabad website design for local businesses, gyms, coaching centers, and real estate. Fast mobile-first sites with local SEO and WhatsApp lead capture.';
+    let metaDescription = description?.trim() || defaultDescription;
+    if (metaDescription.length > maxLength) {
+      metaDescription = `${metaDescription.slice(0, maxLength - 1).trim()}…`;
+    }
+
     const currentUrl = `${window.location.origin}${window.location.pathname}`;
     const imageUrl = image || 'https://vmwebsolutions.in/images/desktop-mockup.webp';
 

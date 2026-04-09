@@ -7,8 +7,6 @@ import React, { useEffect, Suspense, lazy } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'motion/react';
 import Navbar from './components/Navbar';
-import FloatingWhatsApp from './components/FloatingWhatsApp';
-import Footer from './components/Footer';
 import { PageTransition } from './components/animations/PageTransition';
 import { trackEvent } from './utils/analytics';
 import ErrorBoundary from './components/ErrorBoundary';
@@ -22,8 +20,10 @@ const PageSkeleton = () => (
   </div>
 );
 
-// Eagerly Load Critical Path
-import Home from './pages/Home';
+// Lazy Load All Routes
+const Home = lazy(() => import('./pages/Home'));
+const FloatingWhatsApp = lazy(() => import('./components/FloatingWhatsApp'));
+const Footer = lazy(() => import('./components/Footer'));
 
 // Lazy Load Chunked Routes
 const HyderabadWebDesign = lazy(() => import('./pages/HyderabadWebDesign'));
@@ -72,7 +72,9 @@ function App() {
       <ScrollHandler />
       <UTMTracker />
       <Navbar />
-      <FloatingWhatsApp />
+      <Suspense fallback={null}>
+        <FloatingWhatsApp />
+      </Suspense>
       
       <AnimatePresence mode="wait">
         <motion.div key={location.pathname}>
@@ -98,7 +100,9 @@ function App() {
         </motion.div>
       </AnimatePresence>
 
-      <Footer />
+      <Suspense fallback={null}>
+        <Footer />
+      </Suspense>
     </div>
   );
 }
