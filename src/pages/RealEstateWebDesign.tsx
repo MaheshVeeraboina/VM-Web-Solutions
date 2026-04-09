@@ -1,8 +1,8 @@
 import heroImage from '@/assets/images/real-estate-mockup.webp';
 import React, { useState } from 'react';
 import { ArrowRight, CheckCircle2, Building, Map, Key, Search, Plus, Minus } from 'lucide-react';
-import { motion } from 'motion/react';
-
+import { motion } from 'motion/react';import { Breadcrumb } from '../components/Breadcrumb';
+import { RelatedPages } from '../components/RelatedPages';
 const RealEstateWebDesign = () => {
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
 
@@ -219,6 +219,8 @@ const RealEstateWebDesign = () => {
           </div>
         </div>
       </section>
+
+      <RelatedPages currentPath="/real-estate-website-design-india" title="Explore Our Other Service Specializations" />
     </main>
   );
 };

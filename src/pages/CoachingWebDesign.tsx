@@ -1,8 +1,8 @@
 import heroImage from '@/assets/images/coaching-mockup.webp';
 import React, { useState } from 'react';
 import { ArrowRight, CheckCircle2, GraduationCap, Trophy, BookOpen, Search, Plus, Minus } from 'lucide-react';
-import { motion } from 'motion/react';
-
+import { motion } from 'motion/react';import { Breadcrumb } from '../components/Breadcrumb';
+import { RelatedPages } from '../components/RelatedPages';
 const CoachingWebDesign = () => {
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
 
@@ -219,6 +219,8 @@ const CoachingWebDesign = () => {
           </div>
         </div>
       </section>
+
+      <RelatedPages currentPath="/coaching-institute-website-development" title="Explore Our Other Service Specializations" />
     </main>
   );
 };

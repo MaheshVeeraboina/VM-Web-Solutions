@@ -2,6 +2,7 @@ import heroImage from '@/assets/images/desktop-mockup.webp';
 import React, { useState } from 'react';
 import { ArrowRight, CheckCircle2, MapPin, Search, Smartphone, ChartBar, Plus, Minus } from 'lucide-react';
 import { motion } from 'motion/react';
+import { RelatedPages } from '../components/RelatedPages';
 
 const HyderabadWebDesign = () => {
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
@@ -219,6 +220,8 @@ const HyderabadWebDesign = () => {
           </div>
         </div>
       </section>
+
+      <RelatedPages currentPath="/hyderabad-web-design" title="Explore Our Service Specializations" />
     </main>
   );
 };

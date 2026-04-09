@@ -1,8 +1,8 @@
 import heroImage from '@/assets/images/gym-mockup.webp';
 import React, { useState } from 'react';
 import { ArrowRight, CheckCircle2, Dumbbell, CalendarRange, Users, Search, Plus, Minus } from 'lucide-react';
-import { motion } from 'motion/react';
-
+import { motion } from 'motion/react';import { Breadcrumb } from '../components/Breadcrumb';
+import { RelatedPages } from '../components/RelatedPages';
 const GymWebDesign = () => {
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
 
@@ -219,6 +219,8 @@ const GymWebDesign = () => {
           </div>
         </div>
       </section>
+
+      <RelatedPages currentPath="/gym-website-developer-india" title="Explore Our Other Service Specializations" />
     </main>
   );
 };
