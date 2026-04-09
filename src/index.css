@@ -11,7 +11,7 @@
 
 @layer base {
   html {
-    scroll-behavior: smooth;
+    /* Removed scroll-behavior: smooth to use custom optimized scrolling */
   }
   body {
     @apply font-sans text-slate-900 bg-white;

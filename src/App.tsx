@@ -13,6 +13,7 @@ import { PageTransition } from './components/animations/PageTransition';
 import { trackEvent } from './utils/analytics';
 import ErrorBoundary from './components/ErrorBoundary';
 import { SEOHelmet } from './components/SEOHelmet';
+import { useScrollToSection } from './utils/scrollUtils';
 
 // Component Loading Skeleton
 const PageSkeleton = () => (
@@ -53,39 +54,13 @@ const UTMTracker = () => {
 
 // Component to scroll to top or hash on route change
 const ScrollHandler = () => {
-  const { pathname } = useLocation();
-  useEffect(() => {
-    // Handle section scrolling for clean URLs
-    const sectionRoutes = ['/services', '/portfolio', '/pricing', '/testimonials', '/contact'];
-
-    if (sectionRoutes.includes(pathname)) {
-      // For section navigation, scroll to the section with proper offset for navbar
-      const scrollToSection = () => {
-        const id = pathname.replace('/', '');
-        const element = document.getElementById(id);
-        if (element) {
-          // Calculate position with navbar offset (80px as set in CSS scroll-margin-top)
-          const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
-          const offsetPosition = elementPosition - 80;
-
-          window.scrollTo({
-            top: offsetPosition,
-            behavior: 'smooth'
-          });
-        } else {
-          // Retry after a short delay if element not found
-          setTimeout(scrollToSection, 50);
-        }
-      };
-
-      // Initial attempt after a brief delay to ensure DOM is ready
-      setTimeout(scrollToSection, 200);
-    } else {
-      // For other page navigation, scroll to top instantly
-      // This prevents the footer from staying visible during AnimatePresence exit.
-      window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
-    }
-  }, [pathname]);
+  useScrollToSection({
+    sectionRoutes: ['/services', '/portfolio', '/pricing', '/testimonials', '/contact'],
+    preserveScroll: true,
+    offset: 80,
+    behavior: 'smooth', // Using optimized custom smooth scroll
+    delay: 10 // Minimal delay for better responsiveness
+  });
   return null;
 };
 

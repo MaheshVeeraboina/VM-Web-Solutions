@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, ArrowRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Logo } from './icons/Logo';
+import { useScrollNavigation } from '../utils/scrollUtils';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
-  const navigate = useNavigate();
+  const { navigateWithScroll } = useScrollNavigation({ scrollToSection: true });
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -18,8 +19,8 @@ const Navbar = () => {
 
   const handleNavClick = (href: string) => {
     setIsOpen(false);
-    // Use React Router navigation for smooth scrolling
-    navigate(href);
+    // Navigate with scroll to section enabled
+    navigateWithScroll(href);
   };
 
   const navLinks = [

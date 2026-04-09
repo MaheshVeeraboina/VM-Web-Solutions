@@ -2,7 +2,7 @@ import React, { Component, ErrorInfo, ReactNode } from 'react';
 import { AlertCircle } from 'lucide-react';
 
 interface Props {
-  children?: ReactNode;
+  children: ReactNode;
 }
 
 interface State {
@@ -47,7 +47,7 @@ class ErrorBoundary extends Component<Props, State> {
       );
     }
 
-    return (this.props as any).children || null;
+    return (this as any).props.children || null;
   }
 }
 
