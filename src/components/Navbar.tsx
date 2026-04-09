@@ -36,7 +36,6 @@ const Navbar = () => {
     { name: 'Portfolio', href: '/portfolio' },
     { name: 'Pricing', href: '/pricing' },
     { name: 'Testimonials', href: '/testimonials' },
-    { name: 'Contact', href: '/contact' },
   ];
 
   const expertiseLinks = [
