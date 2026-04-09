@@ -1,8 +1,17 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Zap, Smartphone, Target } from 'lucide-react';
 import { motion } from 'motion/react';
+import { reduceMotionOnMobile, isMobileDevice } from '../utils/mobilePerformance';
 
 const Solution = () => {
+  const [reduceMotion, setReduceMotion] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    setIsMobile(isMobileDevice());
+    setReduceMotion(reduceMotionOnMobile());
+  }, []);
+
   return (
     <section className="py-24 px-6 bg-white relative">
       <div className="max-w-7xl mx-auto">
@@ -10,9 +19,10 @@ const Solution = () => {
           
           {/* Left Side: Images/UI mockup */}
           <motion.div 
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, ...(reduceMotion ? {} : { x: -30 }) }}
+            whileInView={{ opacity: 1, ...(reduceMotion ? {} : { x: 0 }) }}
             viewport={{ once: true }}
+            transition={{ duration: reduceMotion ? 0.1 : 0.5 }}
             className="relative"
           >
             <div className="relative z-10 w-full aspect-[4/5] md:aspect-square bg-gradient-to-br from-indigo-50 to-purple-50 rounded-[3rem] overflow-hidden border border-slate-100 flex items-center justify-center p-8">
@@ -44,15 +54,18 @@ const Solution = () => {
               </div>
             </div>
             
-            {/* Background Blob */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-indigo-500/10 rounded-full blur-[80px] -z-10"></div>
+            {/* Background Blob - Hide on mobile for performance */}
+            {!isMobile && (
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-indigo-500/10 rounded-full blur-[80px] -z-10"></div>
+            )}
           </motion.div>
 
           {/* Right Side: Copy */}
           <motion.div 
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, ...(reduceMotion ? {} : { x: 30 }) }}
+            whileInView={{ opacity: 1, ...(reduceMotion ? {} : { x: 0 }) }}
             viewport={{ once: true }}
+            transition={{ duration: reduceMotion ? 0.1 : 0.5 }}
           >
             <div className="inline-flex items-center gap-2 bg-indigo-50 text-indigo-700 px-4 py-1.5 rounded-full text-sm font-bold mb-6">
               The VM Web Solution

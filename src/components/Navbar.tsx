@@ -4,18 +4,24 @@ import { Menu, X, ArrowRight, ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Logo } from './icons/Logo';
 import { useScrollNavigation } from '../utils/scrollUtils';
+import { reduceMotionOnMobile } from '../utils/mobilePerformance';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const [mobileSubMenu, setMobileSubMenu] = useState<string | null>(null);
+  const [reduceMotion, setReduceMotion] = useState(false);
   const { navigateWithScroll } = useScrollNavigation({ scrollToSection: true });
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
+    setReduceMotion(reduceMotionOnMobile());
   }, []);
 
   const handleNavClick = (event: React.MouseEvent<HTMLAnchorElement>, href: string) => {
@@ -91,7 +97,7 @@ const Navbar = () => {
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.15 }}
+                  transition={{ duration: reduceMotion ? 0.05 : 0.15 }}
                   className="absolute top-full -left-6 pt-2 w-64 bg-white rounded-2xl shadow-xl border border-slate-200 overflow-hidden"
                 >
                   {expertiseLinks.map((link, index) => (
@@ -141,6 +147,7 @@ const Navbar = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: reduceMotion ? 0.1 : 0.3 }}
             className="absolute top-full left-0 w-full bg-white/95 backdrop-blur-xl border-b border-slate-100 shadow-2xl overflow-hidden md:hidden"
           >
             <div className="flex flex-col gap-4 p-6 max-h-[80vh] overflow-y-auto">
@@ -174,6 +181,7 @@ const Navbar = () => {
                       initial={{ opacity: 0, height: 0 }}
                       animate={{ opacity: 1, height: 'auto' }}
                       exit={{ opacity: 0, height: 0 }}
+                      transition={{ duration: reduceMotion ? 0.1 : 0.3 }}
                       className="bg-slate-50 rounded-lg overflow-hidden"
                     >
                       {expertiseLinks.map((link) => (

@@ -1,8 +1,15 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Ghost, Store, Clock } from 'lucide-react';
 import { motion } from 'motion/react';
+import { reduceMotionOnMobile } from '../utils/mobilePerformance';
 
 const Problem = () => {
+  const [reduceMotion, setReduceMotion] = useState(false);
+
+  useEffect(() => {
+    setReduceMotion(reduceMotionOnMobile());
+  }, []);
+
   const problems = [
     {
       icon: <Ghost size={32} className="text-red-500" />,
@@ -29,27 +36,28 @@ const Problem = () => {
       <div className="max-w-7xl mx-auto">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, ...(reduceMotion ? {} : { y: 20 }) }}
+            whileInView={{ opacity: 1, ...(reduceMotion ? {} : { y: 0 }) }}
             viewport={{ once: true }}
+            transition={{ duration: reduceMotion ? 0.1 : 0.5 }}
             className="inline-flex items-center gap-2 bg-red-100 text-red-700 px-4 py-1.5 rounded-full text-sm font-bold mb-6"
           >
             The Painful Truth
           </motion.div>
           <motion.h2 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, ...(reduceMotion ? {} : { y: 20 }) }}
+            whileInView={{ opacity: 1, ...(reduceMotion ? {} : { y: 0 }) }}
             viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
+            transition={{ delay: reduceMotion ? 0 : 0.1, duration: reduceMotion ? 0.1 : 0.5 }}
             className="text-3xl md:text-5xl font-extrabold text-slate-900 mb-6 tracking-tight"
           >
             Why Aren't Customers Calling You?
           </motion.h2>
           <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, ...(reduceMotion ? {} : { y: 20 }) }}
+            whileInView={{ opacity: 1, ...(reduceMotion ? {} : { y: 0 }) }}
             viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
+            transition={{ delay: reduceMotion ? 0 : 0.2, duration: reduceMotion ? 0.1 : 0.5 }}
             className="text-lg text-slate-600"
           >
             If you don't have a strong online presence, you are losing money to your competitors every single day.
@@ -60,13 +68,13 @@ const Problem = () => {
           {problems.map((p, i) => (
             <motion.div 
               key={i}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, ...(reduceMotion ? {} : { y: 20 }) }}
+              whileInView={{ opacity: 1, ...(reduceMotion ? {} : { y: 0 }) }}
               viewport={{ once: true }}
-              transition={{ delay: 0.1 * (i + 1) }}
+              transition={{ delay: reduceMotion ? 0 : 0.1 * (i + 1), duration: reduceMotion ? 0.1 : 0.5 }}
               className="bg-white p-8 rounded-[2rem] shadow-sm border border-slate-100 hover:shadow-xl transition-all duration-300 relative group"
             >
-              <div className="w-16 h-16 rounded-2xl bg-slate-50 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+              <div className={`w-16 h-16 rounded-2xl bg-slate-50 flex items-center justify-center mb-6 ${!reduceMotion && 'group-hover:scale-110'} transition-transform`}>
                 {p.icon}
               </div>
               <h3 className="text-xl font-bold text-slate-900 mb-4">{p.title}</h3>
