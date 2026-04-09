@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, ArrowRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Logo } from './icons/Logo';
@@ -7,6 +7,7 @@ import { Logo } from './icons/Logo';
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -14,11 +15,17 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const handleNavClick = (href: string) => {
+    setIsOpen(false);
+    // Use React Router navigation for clean URLs
+    window.location.href = href;
+  };
+
   const navLinks = [
-    { name: 'Services', href: '/#services' },
-    { name: 'Portfolio', href: '/#portfolio' },
-    { name: 'Pricing', href: '/#pricing' },
-    { name: 'Testimonials', href: '/#testimonials' },
+    { name: 'Services', href: '/services' },
+    { name: 'Portfolio', href: '/portfolio' },
+    { name: 'Pricing', href: '/pricing' },
+    { name: 'Testimonials', href: '/testimonials' },
   ];
 
   return (
@@ -37,27 +44,26 @@ const Navbar = () => {
         {/* Desktop Nav */}
         <div className="hidden md:flex items-center gap-8 bg-white/50 backdrop-blur-md px-8 py-3 rounded-full border border-slate-200/50 shadow-sm">
           {navLinks.map((link) => (
-            <Link 
+            <button 
               key={link.name} 
-              to={link.href} 
+              onClick={() => handleNavClick(link.href)}
               className="text-sm font-semibold text-slate-600 hover:text-indigo-600 transition-colors"
-              onClick={() => setIsOpen(false)}
             >
               {link.name}
-            </Link>
+            </button>
           ))}
         </div>
 
         <div className="hidden md:flex items-center gap-4">
-          <Link 
-            to="/#contact" 
+          <button 
+            onClick={() => handleNavClick('/contact')}
             className="group relative inline-flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white px-6 py-3 rounded-full text-sm font-semibold transition-all shadow-lg hover:shadow-xl overflow-hidden"
           >
             <span className="relative z-10 flex items-center gap-2">
               Book Free Call <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
             </span>
             <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 to-purple-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-          </Link>
+          </button>
         </div>
 
         {/* Mobile Toggle */}
@@ -77,22 +83,20 @@ const Navbar = () => {
           >
             <div className="flex flex-col gap-4 p-6">
               {navLinks.map((link) => (
-                <Link 
+                <button 
                   key={link.name} 
-                  to={link.href} 
-                  className="text-lg font-bold text-slate-800 py-3 border-b border-slate-100/50 block w-full"
-                  onClick={() => setIsOpen(false)}
+                  onClick={() => handleNavClick(link.href)}
+                  className="text-lg font-bold text-slate-800 py-3 border-b border-slate-100/50 block w-full text-left"
                 >
                   {link.name}
-                </Link>
+                </button>
               ))}
-              <Link 
-                to="/#contact" 
+              <button 
+                onClick={() => handleNavClick('/contact')}
                 className="bg-indigo-600 text-white text-center py-4 rounded-2xl font-bold mt-4 shadow-lg shadow-indigo-500/25 flex justify-center items-center gap-2 w-full"
-                onClick={() => setIsOpen(false)}
               >
                 Book Free Call <ArrowRight size={18} />
-              </Link>
+              </button>
             </div>
           </motion.div>
         )}

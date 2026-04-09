@@ -53,23 +53,33 @@ const UTMTracker = () => {
 
 // Component to scroll to top or hash on route change
 const ScrollHandler = () => {
-  const { pathname, hash } = useLocation();
+  const { pathname } = useLocation();
   useEffect(() => {
-    // Always scroll to top instantly on any navigation.
-    // This prevents the footer from staying visible during AnimatePresence exit.
-    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
-
-    if (hash) {
-      // Wait for AnimatePresence exit (250ms) + new page mount before scrolling to hash
-      setTimeout(() => {
-        const id = hash.replace('#', '');
+    // Handle section scrolling for clean URLs
+    const sectionRoutes = ['/services', '/portfolio', '/pricing', '/testimonials', '/contact'];
+    
+    if (sectionRoutes.includes(pathname)) {
+      // For section navigation, scroll directly to the section without scrolling to top first
+      // Use multiple attempts to ensure the element is available after page transition
+      const scrollToSection = () => {
+        const id = pathname.replace('/', '');
         const element = document.getElementById(id);
         if (element) {
           element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        } else {
+          // Retry after a short delay if element not found
+          setTimeout(scrollToSection, 50);
         }
-      }, 400);
+      };
+      
+      // Initial attempt after a brief delay
+      setTimeout(scrollToSection, 150);
+    } else {
+      // For other page navigation, scroll to top instantly
+      // This prevents the footer from staying visible during AnimatePresence exit.
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
     }
-  }, [pathname, hash]);
+  }, [pathname]);
   return null;
 };
 
@@ -89,6 +99,11 @@ function App() {
             <Suspense fallback={<PageSkeleton />}>
               <Routes location={location}>
                 <Route path="/" element={<SEOHelmet title="Best Web Design Agency" description="High-converting website development for local Indian businesses."><PageTransition><Home /></PageTransition></SEOHelmet>} />
+                <Route path="/services" element={<SEOHelmet title="Web Design Services - VM Web Solutions" description="Professional web design services for local Indian businesses including responsive design, SEO optimization, and lead generation."><PageTransition><Home /></PageTransition></SEOHelmet>} />
+                <Route path="/portfolio" element={<SEOHelmet title="Web Design Portfolio - VM Web Solutions" description="View our portfolio of high-converting websites for gyms, coaching institutes, real estate, and local businesses."><PageTransition><Home /></PageTransition></SEOHelmet>} />
+                <Route path="/pricing" element={<SEOHelmet title="Web Design Pricing - VM Web Solutions" description="Affordable web design packages for Indian businesses. Get a quote for your website development project."><PageTransition><Home /></PageTransition></SEOHelmet>} />
+                <Route path="/testimonials" element={<SEOHelmet title="Client Testimonials - VM Web Solutions" description="Read reviews from satisfied clients who got more leads and customers through our web design services."><PageTransition><Home /></PageTransition></SEOHelmet>} />
+                <Route path="/contact" element={<SEOHelmet title="Contact VM Web Solutions" description="Get in touch for your web design project. Free consultation and quote for Indian businesses."><PageTransition><Home /></PageTransition></SEOHelmet>} />
                 <Route path="/hyderabad-web-design" element={<SEOHelmet title="Hyderabad Web Design Agency" description="Top-rated web designers in Hyderabad producing WhatsApp leads."><PageTransition><HyderabadWebDesign /></PageTransition></SEOHelmet>} />
                 <Route path="/gym-website-developer-india" element={<SEOHelmet title="Gym Website Developer India" description="Premium website designs for Fitness centers and Gyms."><PageTransition><GymWebDesign /></PageTransition></SEOHelmet>} />
                 <Route path="/coaching-institute-website-development" element={<SEOHelmet title="Coaching Institute Web Design" description="Direct admissions and student portfolios via stunning digital prospectuses."><PageTransition><CoachingWebDesign /></PageTransition></SEOHelmet>} />

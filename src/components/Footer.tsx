@@ -1,9 +1,15 @@
 import React from 'react';
 import { Mail, Phone, MapPin, Instagram, Linkedin, Twitter } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Logo } from './icons/Logo';
 
 const Footer = () => {
+  const location = useLocation();
+
+  const handleNavClick = (href: string) => {
+    // Use React Router navigation for clean URLs
+    window.location.href = href;
+  };
   return (
     <footer className="bg-slate-950 text-slate-400 pt-20 pb-10 px-6 border-t border-slate-800">
       <div className="max-w-7xl mx-auto">
@@ -35,10 +41,10 @@ const Footer = () => {
             <div>
               <h4 className="text-white font-bold text-lg mb-6">Quick Links</h4>
               <ul className="space-y-3">
-                <li><Link to="/#services" className="hover:text-indigo-400 transition-colors">Services</Link></li>
-                <li><Link to="/#portfolio" className="hover:text-indigo-400 transition-colors">Portfolio</Link></li>
-                <li><Link to="/#pricing" className="hover:text-indigo-400 transition-colors">Pricing</Link></li>
-                <li><Link to="/#testimonials" className="hover:text-indigo-400 transition-colors">Testimonials</Link></li>
+                <li><button onClick={() => handleNavClick('/services')} className="hover:text-indigo-400 transition-colors">Services</button></li>
+                <li><button onClick={() => handleNavClick('/portfolio')} className="hover:text-indigo-400 transition-colors">Portfolio</button></li>
+                <li><button onClick={() => handleNavClick('/pricing')} className="hover:text-indigo-400 transition-colors">Pricing</button></li>
+                <li><button onClick={() => handleNavClick('/testimonials')} className="hover:text-indigo-400 transition-colors">Testimonials</button></li>
                 <li><a href="https://wa.me/918309358319" className="text-[#25D366] hover:text-white transition-colors font-semibold">WhatsApp Chat</a></li>
               </ul>
             </div>

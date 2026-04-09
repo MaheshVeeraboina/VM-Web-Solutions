@@ -15,7 +15,11 @@ const staticRoutes = [
   { path: '/real-estate-website-design-india', priority: 0.9, changefreq: 'weekly' },
   { path: '/services', priority: 0.8, changefreq: 'monthly' },
   { path: '/portfolio', priority: 0.8, changefreq: 'monthly' },
-  { path: '/blog', priority: 0.8, changefreq: 'daily' },
+  { path: '/pricing', priority: 0.8, changefreq: 'monthly' },
+  { path: '/testimonials', priority: 0.8, changefreq: 'monthly' },
+  { path: '/contact', priority: 0.8, changefreq: 'monthly' },
+  { path: '/privacy-policy', priority: 0.7, changefreq: 'yearly' },
+  { path: '/terms-of-service', priority: 0.7, changefreq: 'yearly' },
 ];
 
 /**
@@ -25,11 +29,8 @@ const staticRoutes = [
  * If the page count exceeds 50,000, logic branches should split into a Sitemap Index.
  */
 async function getDynamicBlogRoutes() {
-  // Placeholder mock for automated scalable indexing
-  return [
-    { path: '/blog/why-local-businesses-need-websites-india', priority: 0.7, changefreq: 'monthly' },
-    { path: '/blog/generate-whatsapp-leads', priority: 0.7, changefreq: 'monthly' }
-  ];
+  // Placeholder for future blog implementation
+  return [];
 }
 
 async function generateSitemap() {

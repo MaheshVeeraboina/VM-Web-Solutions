@@ -13,7 +13,7 @@ export const FadeIn: React.FC<FadeInProps> = ({
   delay = 0, 
   className = "",
   direction = 'up'
-}) => {
+}) => { 
   const shouldReduceMotion = useReducedMotion();
 
   const getInitialOffset = () => {
