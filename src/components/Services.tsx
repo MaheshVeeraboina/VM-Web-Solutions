@@ -1,9 +1,16 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { LayoutDashboard, MousePointerClick, Search } from 'lucide-react';
 import { FadeIn } from './animations/FadeIn';
 import { StaggerContainer, StaggerItem } from './animations/Stagger';
+import { isMobileDevice } from '../utils/mobilePerformance';
 
 const Services = () => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    setIsMobile(isMobileDevice());
+  }, []);
+
   const services = [
     {
       icon: <LayoutDashboard size={32} className="text-indigo-600" />,

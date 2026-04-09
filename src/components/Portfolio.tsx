@@ -1,8 +1,17 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { ArrowUpRight, TrendingUp } from 'lucide-react';
 import { motion } from 'motion/react';
+import { reduceMotionOnMobile, isMobileDevice } from '../utils/mobilePerformance';
 
 const Portfolio = () => {
+  const [reduceMotion, setReduceMotion] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    setIsMobile(isMobileDevice());
+    setReduceMotion(reduceMotionOnMobile());
+  }, []);
+
   const cases = [
     {
       title: "Excel Coaching Institute",
@@ -48,10 +57,10 @@ const Portfolio = () => {
           {cases.map((c, i) => (
             <motion.div 
               key={i}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, ...(reduceMotion ? {} : { y: 30 }) }}
+              whileInView={{ opacity: 1, ...(reduceMotion ? {} : { y: 0 }) }}
               viewport={{ once: true }}
-              transition={{ delay: 0.1 * i }}
+              transition={{ delay: reduceMotion ? 0 : 0.1 * i, duration: reduceMotion ? 0.1 : 0.5 }}
               className="bg-slate-800 rounded-[2rem] overflow-hidden border border-slate-700/50 hover:border-indigo-500/50 transition-colors group flex flex-col"
             >
               <div className="aspect-[4/3] overflow-hidden relative">
@@ -60,7 +69,7 @@ const Portfolio = () => {
                   alt={c.title} 
                   loading="lazy"
                   decoding="async"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-80 group-hover:opacity-100"
+                  className={`w-full h-full object-cover transition-transform ${reduceMotion ? 'duration-200' : 'duration-700'} opacity-80 group-hover:opacity-100 ${!reduceMotion && 'group-hover:scale-105'}`}
                 />
                 <div className="absolute top-4 right-4 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full text-sm font-bold flex items-center gap-2 border border-white/20">
                   <TrendingUp size={16} className="text-emerald-400" />
@@ -95,8 +104,10 @@ const Portfolio = () => {
         </div>
       </div>
       
-      {/* Background glow */}
-      <div className="absolute bottom-0 right-0 w-[50%] h-[50%] bg-indigo-600/10 rounded-full blur-[120px] pointer-events-none"></div>
+      {/* Background glow - Hide on mobile for performance */}
+      {!isMobile && (
+        <div className="absolute bottom-0 right-0 w-[50%] h-[50%] bg-indigo-600/10 rounded-full blur-[120px] pointer-events-none"></div>
+      )}
     </section>
   );
 };

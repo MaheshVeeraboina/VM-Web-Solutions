@@ -1,10 +1,17 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Star, Quote } from 'lucide-react';
 import { FadeIn } from './animations/FadeIn';
 import { StaggerContainer, StaggerItem } from './animations/Stagger';
 import { AVATAR_RAMESH, AVATAR_LAKSHMI, AVATAR_SURESH } from '../utils/avatars';
+import { isMobileDevice } from '../utils/mobilePerformance';
 
 const Testimonials = () => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    setIsMobile(isMobileDevice());
+  }, []);
+
   const reviews = [
     {
       name: "Ramesh Kumar",

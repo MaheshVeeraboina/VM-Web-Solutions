@@ -1,9 +1,17 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
 import { Plus, Minus } from 'lucide-react';
+import { reduceMotionOnMobile, isMobileDevice } from '../utils/mobilePerformance';
 
 const FAQ = () => {
   const [openIndex, setOpenIndex] = React.useState<number | null>(0);
+  const [reduceMotion, setReduceMotion] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    setIsMobile(isMobileDevice());
+    setReduceMotion(reduceMotionOnMobile());
+  }, []);
 
   const faqs = [
     {
@@ -43,10 +51,10 @@ const FAQ = () => {
         <div className="space-y-4">
           {faqs.map((faq, index) => (
             <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, ...(reduceMotion ? {} : { y: 20 }) }}
+              whileInView={{ opacity: 1, ...(reduceMotion ? {} : { y: 0 }) }}
               viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
+              transition={{ delay: reduceMotion ? 0 : index * 0.1, duration: reduceMotion ? 0.1 : 0.5 }}
               key={index}
               className="border border-slate-200 rounded-2xl overflow-hidden bg-slate-50 transition-all hover:border-indigo-200"
             >
@@ -61,7 +69,7 @@ const FAQ = () => {
               </button>
               
               <div 
-                className={`px-6 overflow-hidden transition-all duration-300 ease-in-out ${
+                className={`px-6 overflow-hidden transition-all ${reduceMotion ? 'duration-100' : 'duration-300'} ease-in-out ${
                   openIndex === index ? 'max-h-96 py-6 border-t border-slate-100' : 'max-h-0'
                 }`}
               >

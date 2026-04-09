@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, useReducedMotion } from 'motion/react';
+import { reduceMotionOnMobile } from '../../utils/mobilePerformance';
 
 interface FadeInProps {
   children: React.ReactNode;
@@ -15,6 +16,13 @@ export const FadeIn: React.FC<FadeInProps> = ({
   direction = 'up'
 }) => { 
   const shouldReduceMotion = useReducedMotion();
+  const [mobileReduce, setMobileReduce] = useState(false);
+
+  useEffect(() => {
+    setMobileReduce(reduceMotionOnMobile());
+  }, []);
+
+  const performanceReduce = shouldReduceMotion || mobileReduce;
 
   const getInitialOffset = () => {
     switch (direction) {
@@ -30,7 +38,7 @@ export const FadeIn: React.FC<FadeInProps> = ({
     <motion.div
       initial={{ 
         opacity: 0, 
-        ...(shouldReduceMotion ? {} : getInitialOffset()) 
+        ...(performanceReduce ? {} : getInitialOffset()) 
       }}
       whileInView={{ 
         opacity: 1, 
@@ -39,9 +47,9 @@ export const FadeIn: React.FC<FadeInProps> = ({
       }}
       viewport={{ once: true, amount: 0.2 }}
       transition={{ 
-        duration: 0.5, 
+        duration: performanceReduce ? 0.1 : 0.5, 
         ease: "easeInOut",
-        delay: shouldReduceMotion ? 0 : delay 
+        delay: performanceReduce ? 0 : delay 
       }}
       className={className}
     >

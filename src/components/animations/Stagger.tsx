@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, useReducedMotion } from 'motion/react';
+import { reduceMotionOnMobile } from '../../utils/mobilePerformance';
 
 interface StaggerContainerProps {
   children: React.ReactNode;
@@ -9,14 +10,21 @@ interface StaggerContainerProps {
 
 export const StaggerContainer: React.FC<StaggerContainerProps> = ({ children, className = "", onViewportEnter }) => {
   const shouldReduceMotion = useReducedMotion();
+  const [mobileReduce, setMobileReduce] = useState(false);
+
+  useEffect(() => {
+    setMobileReduce(reduceMotionOnMobile());
+  }, []);
+
+  const performanceReduce = shouldReduceMotion || mobileReduce;
 
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: shouldReduceMotion ? 0 : 0.1,
-        delayChildren: 0.1,
+        staggerChildren: performanceReduce ? 0 : 0.1,
+        delayChildren: performanceReduce ? 0 : 0.1,
       }
     }
   };
@@ -37,14 +45,21 @@ export const StaggerContainer: React.FC<StaggerContainerProps> = ({ children, cl
 
 export const StaggerItem: React.FC<{ children: React.ReactNode; className?: string }> = ({ children, className = "" }) => {
   const shouldReduceMotion = useReducedMotion();
+  const [mobileReduce, setMobileReduce] = useState(false);
+
+  useEffect(() => {
+    setMobileReduce(reduceMotionOnMobile());
+  }, []);
+
+  const performanceReduce = shouldReduceMotion || mobileReduce;
 
   const itemVariants = {
-    hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 15 },
+    hidden: { opacity: 0, y: performanceReduce ? 0 : 15 },
     visible: { 
       opacity: 1, 
       y: 0,
       transition: {
-        duration: 0.4,
+        duration: performanceReduce ? 0.1 : 0.4,
         ease: "easeInOut"
       }
     }
