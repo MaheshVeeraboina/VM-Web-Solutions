@@ -37,7 +37,7 @@ const Hero = () => {
           </div>
 
           <h1 className="text-4xl md:text-6xl font-extrabold text-slate-900 leading-[1.1] mb-6 tracking-tight">
-            Website Development for <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">Small Businesses</span> in India
+            Hyderabad Website Design and Development for <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">Small Businesses</span>
           </h1>
           
           <h2 className="text-lg md:text-xl text-slate-600 mb-10 leading-relaxed max-w-2xl font-normal">
@@ -66,9 +66,9 @@ const Hero = () => {
 
           <div className="mt-10 flex items-center gap-4 text-sm font-semibold text-slate-500">
             <div className="flex -space-x-3 mr-2">
-              <img src={AVATAR_MK} alt="" width="40" height="40" className="w-10 h-10 rounded-full border-2 border-white shadow-sm" />
-              <img src={AVATAR_VR} alt="" width="40" height="40" className="w-10 h-10 rounded-full border-2 border-white shadow-sm" />
-              <img src={AVATAR_SJ} alt="" width="40" height="40" className="w-10 h-10 rounded-full border-2 border-white shadow-sm" />
+              <img src={AVATAR_MK} alt="Founder avatar" width="40" height="40" className="w-10 h-10 rounded-full border-2 border-white shadow-sm" />
+              <img src={AVATAR_VR} alt="Creative lead avatar" width="40" height="40" className="w-10 h-10 rounded-full border-2 border-white shadow-sm" />
+              <img src={AVATAR_SJ} alt="Operations lead avatar" width="40" height="40" className="w-10 h-10 rounded-full border-2 border-white shadow-sm" />
               <div className="w-10 h-10 rounded-full border-2 border-white bg-slate-100 flex items-center justify-center text-xs text-slate-600 font-bold z-10">+47</div>
             </div>
             <p>Joined by 50+ local businesses</p>

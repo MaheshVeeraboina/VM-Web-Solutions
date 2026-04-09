@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Menu, X, ArrowRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Logo } from './icons/Logo';
@@ -8,7 +8,6 @@ import { useScrollNavigation } from '../utils/scrollUtils';
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const location = useLocation();
   const { navigateWithScroll } = useScrollNavigation({ scrollToSection: true });
 
   useEffect(() => {
@@ -17,9 +16,9 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleNavClick = (href: string) => {
+  const handleNavClick = (event: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    event.preventDefault();
     setIsOpen(false);
-    // Navigate with scroll to section enabled
     navigateWithScroll(href);
   };
 
@@ -28,6 +27,7 @@ const Navbar = () => {
     { name: 'Portfolio', href: '/portfolio' },
     { name: 'Pricing', href: '/pricing' },
     { name: 'Testimonials', href: '/testimonials' },
+    { name: 'Contact', href: '/contact' },
   ];
 
   return (
@@ -46,19 +46,20 @@ const Navbar = () => {
         {/* Desktop Nav */}
         <div className="hidden md:flex items-center gap-8 bg-white/50 backdrop-blur-md px-8 py-3 rounded-full border border-slate-200/50 shadow-sm">
           {navLinks.map((link) => (
-            <button 
-              key={link.name} 
-              onClick={() => handleNavClick(link.href)}
+            <Link 
+              key={link.name}
+              to={link.href}
+              onClick={(event) => handleNavClick(event, link.href)}
               className="text-sm font-semibold text-slate-600 hover:text-indigo-600 transition-colors"
             >
               {link.name}
-            </button>
+            </Link>
           ))}
         </div>
 
         <div className="hidden md:flex items-center gap-4">
           <button 
-            onClick={() => handleNavClick('/contact')}
+            onClick={() => navigateWithScroll('/contact')}
             className="group relative inline-flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white px-6 py-3 rounded-full text-sm font-semibold transition-all shadow-lg hover:shadow-xl overflow-hidden"
           >
             <span className="relative z-10 flex items-center gap-2">
@@ -85,16 +86,17 @@ const Navbar = () => {
           >
             <div className="flex flex-col gap-4 p-6">
               {navLinks.map((link) => (
-                <button 
-                  key={link.name} 
-                  onClick={() => handleNavClick(link.href)}
+                <Link 
+                  key={link.name}
+                  to={link.href}
+                  onClick={(event) => handleNavClick(event, link.href)}
                   className="text-lg font-bold text-slate-800 py-3 border-b border-slate-100/50 block w-full text-left"
                 >
                   {link.name}
-                </button>
+                </Link>
               ))}
               <button 
-                onClick={() => handleNavClick('/contact')}
+                onClick={() => navigateWithScroll('/contact')}
                 className="bg-indigo-600 text-white text-center py-4 rounded-2xl font-bold mt-4 shadow-lg shadow-indigo-500/25 flex justify-center items-center gap-2 w-full"
               >
                 Book Free Call <ArrowRight size={18} />
