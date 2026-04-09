@@ -57,23 +57,29 @@ const ScrollHandler = () => {
   useEffect(() => {
     // Handle section scrolling for clean URLs
     const sectionRoutes = ['/services', '/portfolio', '/pricing', '/testimonials', '/contact'];
-    
+
     if (sectionRoutes.includes(pathname)) {
-      // For section navigation, scroll directly to the section without scrolling to top first
-      // Use multiple attempts to ensure the element is available after page transition
+      // For section navigation, scroll to the section with proper offset for navbar
       const scrollToSection = () => {
         const id = pathname.replace('/', '');
         const element = document.getElementById(id);
         if (element) {
-          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          // Calculate position with navbar offset (80px as set in CSS scroll-margin-top)
+          const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+          const offsetPosition = elementPosition - 80;
+
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
         } else {
           // Retry after a short delay if element not found
           setTimeout(scrollToSection, 50);
         }
       };
-      
-      // Initial attempt after a brief delay
-      setTimeout(scrollToSection, 150);
+
+      // Initial attempt after a brief delay to ensure DOM is ready
+      setTimeout(scrollToSection, 200);
     } else {
       // For other page navigation, scroll to top instantly
       // This prevents the footer from staying visible during AnimatePresence exit.
