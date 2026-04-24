@@ -6,6 +6,7 @@
 import React, { useEffect, Suspense, lazy } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'motion/react';
+import { Analytics } from '@vercel/analytics/react';
 import Navbar from './components/Navbar';
 import { PageTransition } from './components/animations/PageTransition';
 import { trackEvent } from './utils/analytics';
@@ -103,6 +104,7 @@ function App() {
       <Suspense fallback={null}>
         <Footer />
       </Suspense>
+      <Analytics />
     </div>
   );
 }
